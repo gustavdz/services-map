@@ -32,27 +32,28 @@ const routes: Routes = [
       { path: 'map', component: MapComponent},
       { path: 'login', component: LoginComponent },
       { path: 'registro', component: RegistroComponent },
-      { path: '', redirectTo: 'map', pathMatch: 'prefix' }
+      { path: '**', redirectTo: '/map', pathMatch: 'full' },
+      { path: '', redirectTo: '/map', pathMatch: 'full' }
       ]
   },
-  { path: '', component: MainComponent,
-    children: [
-      { path: 'tables', component: TablesComponent, canActivate: [AuthGuard] },
-      { path: 'tables/:id', component: TableComponent, canActivate: [AuthGuard] },
-      { path: 'areas', component: AreasComponent, canActivate: [AuthGuard] },
-      { path: 'areas/:id', component: AreaComponent, canActivate: [AuthGuard] },
-      { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuard] },
-      { path: 'categories/:id', component: CategoryComponent, canActivate: [AuthGuard] },
-      { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },
-      { path: 'products/:id', component: ProductComponent, canActivate: [AuthGuard] },
-      { path: 'customers', component: CustomersComponent, canActivate: [AuthGuard] },
-      { path: 'customers/:id', component: CustomerComponent, canActivate: [AuthGuard] },
-      { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
-      { path: 'orders/:id', component: OrderComponent, canActivate: [AuthGuard] },
-      { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-      { path: '', redirectTo: 'home', pathMatch: 'prefix' }
-    ]
-  }
+  // { path: '', component: MainComponent,
+  //   children: [
+  //     { path: 'tables', component: TablesComponent, canActivate: [AuthGuard] },
+  //     { path: 'tables/:id', component: TableComponent, canActivate: [AuthGuard] },
+  //     { path: 'areas', component: AreasComponent, canActivate: [AuthGuard] },
+  //     { path: 'areas/:id', component: AreaComponent, canActivate: [AuthGuard] },
+  //     { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuard] },
+  //     { path: 'categories/:id', component: CategoryComponent, canActivate: [AuthGuard] },
+  //     { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },
+  //     { path: 'products/:id', component: ProductComponent, canActivate: [AuthGuard] },
+  //     { path: 'customers', component: CustomersComponent, canActivate: [AuthGuard] },
+  //     { path: 'customers/:id', component: CustomerComponent, canActivate: [AuthGuard] },
+  //     { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
+  //     { path: 'orders/:id', component: OrderComponent, canActivate: [AuthGuard] },
+  //     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  //     { path: '', redirectTo: 'home', pathMatch: 'prefix' }
+  //   ]
+  // }
 ];
 
 @NgModule({
