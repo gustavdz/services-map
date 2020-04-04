@@ -1,0 +1,36 @@
+<mat-toolbar class="sidenav mat-elevation-z6 zindex2">
+    <span><mat-icon mat-list-icon class="m-r-20 m-t-5 font-40">store</mat-icon></span>
+    <span class="logo-text m-r-10 font-40"> RestoFood</span>
+    <mat-icon (click)="toogleSidenav()" class="button-pointer">menu</mat-icon>
+    <span class="example-fill-remaining-space"></span>
+    <mat-icon class="hov-pointer" (click)="salir()">logout</mat-icon>
+</mat-toolbar>
+
+<mat-sidenav-container autosize>
+    <mat-sidenav #sidenav mode="side" class="sidenav"
+                 [ngStyle]="{ 'width.em': sidenavWidth }"
+                 [opened]="sidenavStatus">
+        <mat-nav-list>
+            <mat-list-item routerLink="/home" routerLinkActive="active">
+                <mat-icon mat-list-icon class="text-white">home</mat-icon>
+                <div fxFlex="10"></div>
+                <div *ngIf="sidenavWidth > 6" class="sidenav-item">
+                    <h5>Home</h5>
+                </div>
+            </mat-list-item>
+            <mat-list-item routerLink="/areas" routerLinkActive="active">
+                <mat-icon mat-list-icon class="text-white">face</mat-icon>
+                <div fxFlex="10"></div>
+                <div *ngIf="sidenavWidth > 6" class="sidenav-item">
+                    <h5>About</h5>
+                </div>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content class="sidenav-content">
+        <mat-card>
+            <router-outlet></router-outlet>
+        </mat-card>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+<mat-toolbar class="footer"><div class="text-center w-full">Desarrollado por Gustavo Decker &copy; 2020</div></mat-toolbar>

@@ -1,0 +1,52 @@
+<div class="animated fadeIn sidenav-content">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Productos</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <button mat-raised-button color="primary"
+                        [routerLink]="['/products', 0]">Agregar</button>
+            </div>
+        </div>
+    </div>
+
+    <h2>Listado de productos</h2>
+    <div infiniteScroll [infiniteScrollDistance]="2"  (scrolled)="onScroll()">
+        <div class="row row-cols-1 row-cols-md-4">
+            <div class="col mb-4" *ngFor="let product of productsToShow; index as i">
+                <mat-card class="div-card">
+                    <mat-card-header>
+                        <img mat-card-avatar src="../../../assets/images/products/avatar.png">
+                        <mat-card-title>{{product.name}}</mat-card-title>
+                        <mat-card-subtitle>{{product.category.name}}</mat-card-subtitle>
+                    </mat-card-header>
+                        <img mat-card-image src="{{ product.image }}" alt="{{product.name}}">
+                    <mat-card-content>
+                        <p>
+                            {{product.description | truncate: 50}}
+                        </p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <div align="start" class="float-left">
+                            <button mat-button color="primary"
+                                    [routerLink]="['/products', product.id]">Editar</button>
+                        </div>
+                        <div align="end">
+                            <button mat-button color="warn"
+                                    (click)="borrarProduct( product, i )">Eliminar</button>
+                        </div>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+        <div *ngIf="showMoreButton" class="w-full text-center alternate-theme m-b-10">
+            <button mat-raised-button
+                    color="accent"
+                    (click)="loadMore()">
+                Cargar más
+            </button>
+        </div>
+        <button *ngIf="showGoUpButton" mat-fab color="primary" [ngClass]="'no-hidden'" (click)="scrollTop()"><i class="material-icons">arrow_upward</i></button>
+    </div>
+
+</div>
+

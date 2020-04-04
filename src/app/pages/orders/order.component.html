@@ -1,0 +1,77 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1>Orden Actual</h1>
+    <hr>
+    <div class="row text-right">
+        <div class="col alternate-theme">
+            <button mat-raised-button color="warn"
+                    routerLink="/orders"><i class="fa fa-arrow-left"></i> Regresar</button>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn faster" cdkDropListGroup>
+    <div class="col">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Productos</mat-card-title>
+                <mat-card-subtitle>Listado de productos disponibles:</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <input type="text" placeholder="Búsqueda de producto" class="form-control" name="search" #search (keyup)="getProducts(search.value)" autocomplete="off"/>
+                <br/>
+                <div cdkDropList
+                        #productList="cdkDropList"
+                        [cdkDropListData]="products"
+                        [cdkDropListConnectedTo]="[orderList]"
+                        class="example-list"
+                        (cdkDropListDropped)="drop($event)">
+                    <div class="example-box" *ngFor="let product of products; index as i" cdkDrag >
+                        <img mat-card-avatar src="{{ product.image }}">
+                        <span class="example-fill-remaining-space"></span>
+                        <span class="text-right">
+                            <b>{{product.name}}</b>
+                            <br><small>{{product.description}}</small>
+                            <br>$ {{product.price}}
+                            <div align="end">
+                            <button mat-button color="warn"
+                                    (click)="moveItem( i )">Agregar</button>
+                        </div>
+                        </span>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="col">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Orden</mat-card-title>
+                <mat-card-subtitle><b>Total a cobrar: $ {{currentAmount}}</b></mat-card-subtitle>
+                <mat-card-subtitle>Productos a cobrar:</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <div cdkDropList
+                        #orderList="cdkDropList"
+                        [cdkDropListData]="currentOrder"
+                        [cdkDropListConnectedTo]="[productList]"
+                        class="example-list"
+                        (cdkDropListDropped)="drop($event)">
+                    <div class="example-box" *ngFor="let item of currentOrder; index as i" cdkDrag >
+                        <img mat-card-avatar src="{{ item.image }}">
+                        <span class="example-fill-remaining-space"></span>
+                        <span class="text-right">
+                            <b>{{item.name}}</b>
+                            <br><small>{{item.description}}</small>
+                            <br>$ {{item.price}}
+                            <div align="end">
+                            <button mat-button color="warn"
+                                    (click)="deleteItem( i )">Quitar</button>
+                        </div>
+                        </span>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+</div>

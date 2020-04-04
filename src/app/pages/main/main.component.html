@@ -1,0 +1,59 @@
+<div>
+    <mat-toolbar class="example-toolbar mat-elevation-z6 zindex2" color="accent" >
+        <span><mat-icon mat-list-icon class="m-r-20 m-t-5 font-40">store</mat-icon></span>
+        <span class="logo-text m-r-10 font-40"> RestoFood</span>
+        <mat-icon (click)="isExpanded = !isExpanded" class="m-r-10 hov-pointer" >menu</mat-icon>
+        <span class="example-fill-remaining-space"></span>
+        <mat-icon class="hov-pointer" (click)="salir()">logout</mat-icon>
+    </mat-toolbar>
+    <mat-sidenav-container  class="example-sidenav-container" autosize>
+        <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true">
+            <mat-nav-list class="dashboard">
+                <!-- <a mat-list-item (click)="toggleActive($event)"> -->
+                <mat-list-item routerLinkActive="active mat-elevation-z6" routerLink="/home">
+                    <mat-icon mat-list-icon >dashboard</mat-icon>
+                    <p matLine *ngIf="isExpanded">Home</p>
+                </mat-list-item>
+
+                <mat-divider></mat-divider>
+
+                <mat-list-item routerLinkActive="active mat-elevation-z6" routerLink="/areas">
+                    <mat-icon mat-list-icon>room</mat-icon>
+                    <p matLine *ngIf="isExpanded">Áreas</p>
+                </mat-list-item>
+
+                <mat-list-item routerLinkActive="active mat-elevation-z6" routerLink="/orders">
+                    <mat-icon mat-list-icon>post_add</mat-icon>
+                    <p matLine routerLinkActive="active" *ngIf="isExpanded">Órdenes</p>
+                </mat-list-item>
+
+                <mat-list-item routerLinkActive="active mat-elevation-z6" routerLink="/tables">
+                    <mat-icon mat-list-icon>deck</mat-icon>
+                    <p matLine *ngIf="isExpanded">Mesas</p>
+                </mat-list-item>
+
+                <mat-list-item routerLinkActive="active mat-elevation-z6" routerLink="/categories">
+                    <mat-icon mat-list-icon>list</mat-icon>
+                    <p matLine *ngIf="isExpanded">Categorias</p>
+                </mat-list-item>
+
+                <mat-list-item routerLinkActive="active mat-elevation-z6" routerLink="/products">
+                    <mat-icon mat-list-icon>fastfood</mat-icon>
+                    <p matLine *ngIf="isExpanded">Productos</p>
+                </mat-list-item>
+
+                <mat-list-item routerLinkActive="active mat-elevation-z6" routerLink="/customers">
+                    <mat-icon mat-list-icon>people_alt</mat-icon>
+                    <p matLine *ngIf="isExpanded">Clientes</p>
+                </mat-list-item>
+
+                <mat-divider></mat-divider>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <div class="example-sidenav-content flex-col p-l-20 p-r-20 m-b-40">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-container>
+    <mat-toolbar class="footer"><div class="text-center w-full">Desarrollado por <a href="https://www.gustavodecker.com" target="_blank">Gustavo Decker</a> &copy; 2020</div></mat-toolbar>
+</div>

@@ -1,0 +1,80 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1>Mesa <small>{{table.name}}</small> </h1>
+    <hr>
+    <div class="row text-right">
+        <div class="col alternate-theme">
+            <button mat-raised-button color="warn"
+                    routerLink="/tables"><i class="fa fa-arrow-left"></i> Regresar</button>
+        </div>
+    </div>
+</div>
+
+<h2>Datos</h2>
+
+<div class="row animated fadeIn faster">
+    <div class="col">
+
+        <form (ngSubmit)="guardar( f )"
+              #f="ngForm">
+
+            <div class="form-group">
+                <label>Mesa ID</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="ID interno"
+                       [(ngModel)]="table.id"
+                       name="id"
+                       disabled="disabled">
+                <small class="form-text text-muted">Este campo es autogenerado</small>
+            </div>
+
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Nombre de la mesa"
+                       [(ngModel)]="table.name"
+                       name="name"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Número</label>
+                <input type="numeric"
+                       class="form-control"
+                       placeholder="Número de la mesa"
+                       [(ngModel)]="table.number"
+                       name="number"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Asientos</label>
+                <input type="numeric"
+                       class="form-control"
+                       placeholder="Número de asientos"
+                       [(ngModel)]="table.seats"
+                       name="seats"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Áreas</label>
+                <select class="form-control" name="miselect" [(ngModel)]="seleccionado" [compareWith]="compararNombres">
+                    <option [ngValue]="area" *ngFor="let area of areas">{{area.name}}</option>
+                </select>
+            </div>
+
+            <hr>
+            <div class="form-group text-center">
+                <button type="submit"
+                        class="btn btn-primary w-25">
+                    <i class="fa fa-save"></i>
+                    Guardar
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>

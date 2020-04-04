@@ -1,0 +1,34 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$my-app-primary: mat-palette($mat-blue);
+$my-app-accent:  mat-palette($mat-green);
+$my-app-warn:    mat-palette($mat-deep-orange);
+
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+
+@include angular-material-theme($my-app-theme);
+
+.alternate-theme {
+  $alternate-primary: mat-palette($mat-light-blue);
+  $alternate-accent: mat-palette($mat-yellow);
+  $alternate-theme: mat-light-theme($alternate-primary, $alternate-accent);
+  @include angular-material-theme($alternate-theme);
+}
+
+@font-face {
+  font-family: "Grand Hotel";
+  src: url(assets/fonts/grand-hotel/GrandHotel-Regular.otf) format("opentype");
+}
+
+.logo-text {
+  font-family: "Grand Hotel";
+}
+
+.font-40 {
+  font-size: 40px;
+}
+
+html {
+  scroll-behavior: smooth;
+}

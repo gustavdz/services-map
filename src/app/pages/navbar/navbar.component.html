@@ -1,0 +1,21 @@
+<mat-toolbar class="mat-elevation-z6 text-white" color="accent" >
+  <img *ngIf="isExpanded" src="../../../assets/images/logos/logo-white.png"/>
+  <mat-icon *ngIf="!isExpanded" mat-list-icon >store</mat-icon>
+  <mat-icon (click)="isExpanded = !isExpanded" class="m-r-10 hov-pointer" >menu</mat-icon>
+  <span class="example-fill-remaining-space"></span>
+  <mat-icon class="hov-pointer" (click)="salir()">logout</mat-icon>
+</mat-toolbar>
+
+<!--
+<nav class="navbar navbar-dark fixed-top bg-green flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
+
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap m-r-10">
+      <button mat-icon-button (click)="salir()" class="text-white">
+        <i class="material-icons">logout</i> Salir
+      </button>
+    </li>
+  </ul>
+</nav>
+-->

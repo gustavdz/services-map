@@ -1,0 +1,100 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1>Producto <small>{{product.name}}</small> </h1>
+    <hr>
+    <div class="row text-right">
+        <div class="col alternate-theme">
+            <button mat-raised-button color="warn"
+                    routerLink="/products"><i class="fa fa-arrow-left"></i> Regresar</button>
+        </div>
+    </div>
+</div>
+
+<h2>Datos</h2>
+
+<div class="row animated fadeIn faster">
+    <div class="col-8">
+        <form (ngSubmit)="guardar( f )"
+              #f="ngForm">
+            <div class="form-group">
+                <label>Product ID</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="ID interno"
+                       [(ngModel)]="product.id"
+                       name="id"
+                       disabled="disabled">
+                <small class="form-text text-muted">Este campo es autogenerado</small>
+            </div>
+
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Nombre del producto"
+                       [(ngModel)]="product.name"
+                       name="name"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Descripción</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Descripcion del producto"
+                       [(ngModel)]="product.description"
+                       name="description"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Precio</label>
+                <input type="number"
+                       class="form-control"
+                       placeholder="Precio del producto"
+                       [(ngModel)]="product.price"
+                       name="price"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Categorías</label>
+                <select class="form-control" name="miselect" [(ngModel)]="seleccionado" [compareWith]="compararNombres">
+                    <option [ngValue]="category" *ngFor="let category of categories">{{category.name}}</option>
+                </select>
+            </div>
+
+            <hr>
+            <div class="form-group text-center">
+                <button type="submit"
+                        class="btn btn-primary w-25">
+                    <i class="fa fa-save"></i>
+                    Guardar
+                </button>
+            </div>
+
+        </form>
+    </div>
+    <div class="col-4">
+        <div class="form-group">
+            <div class="image-preview">
+                <!-- <img src="../../../assets/images/products/{{product.image}}.jpg" class="img-thumbnail rounded img-fluid mx-auto d-block m-b-10">-->
+                <img *ngIf="imagePreview" [src]="imagePreview" (click)="selectFile.click()" class="img-thumbnail rounded img-fluid mx-auto d-block m-b-10">
+                <img *ngIf="!imagePreview && product.image" src="{{product.image}}" (click)="selectFile.click()" class="img-thumbnail rounded img-fluid mx-auto d-block m-b-10">
+                <img *ngIf="!imagePreview && !product.image" src="{{productDefault}}" (click)="selectFile.click()" class="img-thumbnail rounded img-fluid mx-auto d-block m-b-10">
+                <input style="display: none" type="file" (change)="onFileUpload($event)" #selectFile>
+
+                <div class="text-center m-t-10">
+                    <div class="button-row">
+                        <button mat-raised-button color="accent" class="text-white" (click)="selectFile.click()"><i class="material-icons">
+                            photo_library
+                        </i> Select File</button>
+                        <button *ngIf="product.id > 0" mat-raised-button color="primary" (click)="OnUploadFile()">
+                            <i class="material-icons">
+                                cloud_upload
+                            </i> Subir Imagen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
