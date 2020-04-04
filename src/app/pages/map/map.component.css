@@ -1,0 +1,8 @@
+agm-map {
+    height: calc(100vh - 223px - 1.5rem);
+}
+
+agm-info-window {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    color: gray;
+}

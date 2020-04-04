@@ -1,4 +1,4 @@
-# RestFood App
+# Mapas de Servicio Covid-19 (Ec)
 
 Angular 8 application to connect with a tables/restaurants management backend software.
 

@@ -19,12 +19,22 @@ import {OrdersComponent} from './pages/orders/orders.component';
 import {OrderComponent} from './pages/orders/order.component';
 import {MainComponent} from './pages/main/main.component';
 import {ContainerComponent} from './pages/container/container.component';
+import {MapComponent} from './pages/map/map.component';
+import {TemplateComponent} from './pages/map/template/template.component';
 
 
 const routes: Routes = [
   { path: 'registro', component: RegistroComponent },
   { path: 'login', component: LoginComponent },
   { path: 'template2', component: ContainerComponent},
+  { path: '', component: TemplateComponent ,
+    children: [
+      { path: 'map', component: MapComponent},
+      { path: 'login', component: LoginComponent },
+      { path: 'registro', component: RegistroComponent },
+      { path: '', redirectTo: 'map', pathMatch: 'prefix' }
+      ]
+  },
   { path: '', component: MainComponent,
     children: [
       { path: 'tables', component: TablesComponent, canActivate: [AuthGuard] },

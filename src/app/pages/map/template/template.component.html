@@ -1,7 +1,7 @@
 <div>
     <mat-toolbar class="example-toolbar mat-elevation-z6 zindex2" color="accent" >
         <span><mat-icon mat-list-icon class="m-r-20 m-t-5 font-40">store</mat-icon></span>
-        <span class="logo-text m-r-10 font-40"> ServiceMap</span>
+        <span class="logo-text m-r-10 font-40"> Service Map</span>
         <mat-icon (click)="isExpanded = !isExpanded" class="m-r-10 hov-pointer" >menu</mat-icon>
         <span class="example-fill-remaining-space"></span>
         <mat-icon class="hov-pointer" (click)="salir()">logout</mat-icon>
@@ -9,10 +9,11 @@
     <mat-sidenav-container  class="example-sidenav-container" autosize>
         <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true">
             <mat-nav-list class="dashboard">
-                <!-- <a mat-list-item (click)="toggleActive($event)"> -->
-                <mat-list-item routerLinkActive="active mat-elevation-z6" routerLink="/home">
-                    <mat-icon mat-list-icon >dashboard</mat-icon>
-                    <p matLine *ngIf="isExpanded">Home</p>
+                <br/>
+                <mat-list-item routerLinkActive="active mat-elevation-z6" routerLink="/map">
+                    <!--<mat-icon mat-list-icon >streetview</mat-icon>-->
+                    <fa-icon [icon]="faMapMarkedAlt" start></fa-icon>
+                    <p matLine *ngIf="isExpanded">Mapa</p>
                 </mat-list-item>
 
                 <mat-divider></mat-divider>
@@ -55,5 +56,10 @@
             <router-outlet></router-outlet>
         </div>
     </mat-sidenav-container>
-    <mat-toolbar class="footer"><div class="text-center w-full">Desarrollado por <a href="https://www.gustavodecker.com" target="_blank">Gustavo Decker</a> &copy; 2020</div></mat-toolbar>
+    <mat-toolbar class="footer">
+        <div class="text-center w-full">
+            <b>&copy; 2020 </b>
+            <a href="https://www.gustavodecker.com" target="_blank" style="text-decoration: none; color: white;">DeckTech </a>
+        </div>
+    </mat-toolbar>
 </div>

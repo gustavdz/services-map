@@ -14,6 +14,7 @@ import {
     MatTableModule, MatToolbarModule,
     MatTooltipModule
 } from '@angular/material';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,6 +39,10 @@ import { OrderComponent } from './pages/orders/order.component';
 import { MainComponent } from './pages/main/main.component';
 import { ContainerComponent } from './pages/container/container.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { MapComponent } from './pages/map/map.component';
+import {AgmCoreModule} from '@agm/core';
+import {AgmJsMarkerClustererModule} from '@agm/js-marker-clusterer';
+import { TemplateComponent } from './pages/map/template/template.component';
 
 
 @NgModule({
@@ -62,7 +67,9 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     OrdersComponent,
     OrderComponent,
     MainComponent,
-    ContainerComponent
+    ContainerComponent,
+    MapComponent,
+    TemplateComponent
   ],
     imports: [
         BrowserModule,
@@ -85,7 +92,12 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
         MatCheckboxModule,
         MatFormFieldModule,
         MatInputModule,
-        DragDropModule
+        DragDropModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyDjbU0iPZDFsw_D0qiSzQA1U6JBxZWHup4'
+        }),
+        AgmJsMarkerClustererModule,
+        FontAwesomeModule
     ],
   providers: [],
   bootstrap: [AppComponent]

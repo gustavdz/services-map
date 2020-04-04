@@ -1,0 +1,38 @@
+<div class="animated fadeIn w-full">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <button class="btn btn-sm btn-outline-secondary">Share</button>
+                <button class="btn btn-sm btn-outline-secondary">Export</button>
+            </div>
+            <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <span data-feather="calendar"></span>
+                This week
+            </button>
+        </div>
+    </div>
+    <h1>Servicios disponibles</h1>
+
+    <agm-map
+            [latitude]="lat"
+            [longitude]="lng"
+            [zoom]="zoom"
+            [disableDefaultUI]="false"
+    >
+        <agm-marker-cluster
+                imagePath="{{options.imagePath}}">
+            <agm-marker
+                    *ngFor="let m of markers; let i = index"
+                    (markerClick)="clickedMarker(m.label, i)"
+                    [latitude]="m.lat"
+                    [longitude]="m.lng"
+                    [markerDraggable]="m.draggable"
+                    (dragEnd)="markerDragEnd(m, $event)">
+                <agm-info-window>
+                    {{m.label}}
+                </agm-info-window>
+            </agm-marker>
+        </agm-marker-cluster>
+    </agm-map>
+</div>
