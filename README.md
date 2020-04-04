@@ -2,7 +2,7 @@
 
 Angular 8 application to connect with a tables/restaurants management backend software.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.23
 
 ## Development server
 

@@ -43,7 +43,7 @@ import { MapComponent } from './pages/map/map.component';
 import {AgmCoreModule} from '@agm/core';
 import {AgmJsMarkerClustererModule} from '@agm/js-marker-clusterer';
 import { TemplateComponent } from './pages/map/template/template.component';
-
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -94,7 +94,7 @@ import { TemplateComponent } from './pages/map/template/template.component';
         MatInputModule,
         DragDropModule,
         AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyDjbU0iPZDFsw_D0qiSzQA1U6JBxZWHup4'
+            apiKey: environment.APIKeys.GoogleMapsAPIKey
         }),
         AgmJsMarkerClustererModule,
         FontAwesomeModule

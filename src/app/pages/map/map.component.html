@@ -30,7 +30,9 @@
                     [markerDraggable]="m.draggable"
                     (dragEnd)="markerDragEnd(m, $event)">
                 <agm-info-window>
-                    {{m.label}}
+                    <p>{{m.label}}</p>
+                    <p>{{m.name}}</p>
+                    <p>{{m.description}}</p>
                 </agm-info-window>
             </agm-marker>
         </agm-marker-cluster>
