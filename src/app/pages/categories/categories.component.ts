@@ -8,7 +8,6 @@ import * as Feather from 'feather-icons';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {merge, of as observableOf} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
-import {AreaModel} from '../../models/area.model';
 
 @Component({
   selector: 'app-categories',

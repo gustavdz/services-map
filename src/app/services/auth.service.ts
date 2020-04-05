@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {UsuarioModel} from '../models/usuario.model';
 import { map } from 'rxjs/operators';
+import {environment} from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private url = 'http://localhost:8000/api/v1/auth';
+  private url = environment.baseURL + '/auth';
 
   userToken: string;
 

@@ -3,13 +3,14 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthService} from '../auth.service';
 import {map} from 'rxjs/operators';
 import {CategoryModel} from '../../models/category.model';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
 
-  private url = 'http://localhost:8000/api/v1';
+  private url = environment.baseURL;
 
   constructor(private http: HttpClient,
               private auth: AuthService) {
@@ -63,10 +64,10 @@ export class CategoryService {
   getCategories(page: number) {
     return this.http.get(`${this.url}/categories?page=${page + 1}`, {
       headers: new HttpHeaders().set('Authorization', `Bearer ${this.auth.userToken}`)
-    });
-        // .pipe(
-        //     map(resp => this.CreateArrayCategory(resp['objCategory']['data']))
-        // );
+    })
+        .pipe(
+            map(resp => this.CreateArrayCategory(resp['objCategory']['data']))
+        );
   }
 
   private CreateArrayCategory(categoriesObj: object) {
@@ -80,4 +81,5 @@ export class CategoryService {
     });
     return categories;
   }
+
 }
