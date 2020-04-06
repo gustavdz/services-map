@@ -12,40 +12,19 @@
                 <br/>
                 <mat-list-item routerLinkActive="active mat-elevation-z6" routerLink="/map">
                     <mat-icon mat-list-icon>map</mat-icon>
-                    <!--<fa-icon [icon]="faMapMarkedAlt" start></fa-icon>-->
                     <p matLine *ngIf="isExpanded">Mapa</p>
                 </mat-list-item>
 
                 <mat-divider></mat-divider>
-
-                <mat-list-item routerLinkActive="active mat-elevation-z6" routerLink="/areas">
-                    <mat-icon mat-list-icon>room</mat-icon>
-                    <p matLine *ngIf="isExpanded">Áreas</p>
-                </mat-list-item>
-
-                <mat-list-item routerLinkActive="active mat-elevation-z6" routerLink="/orders">
-                    <mat-icon mat-list-icon>post_add</mat-icon>
-                    <p matLine routerLinkActive="active" *ngIf="isExpanded">Órdenes</p>
-                </mat-list-item>
-
-                <mat-list-item routerLinkActive="active mat-elevation-z6" routerLink="/tables">
-                    <mat-icon mat-list-icon>deck</mat-icon>
-                    <p matLine *ngIf="isExpanded">Mesas</p>
-                </mat-list-item>
 
                 <mat-list-item routerLinkActive="active mat-elevation-z6" routerLink="/categories">
                     <mat-icon mat-list-icon>list</mat-icon>
                     <p matLine *ngIf="isExpanded">Categorias</p>
                 </mat-list-item>
 
-                <mat-list-item routerLinkActive="active mat-elevation-z6" routerLink="/products">
-                    <mat-icon mat-list-icon>fastfood</mat-icon>
-                    <p matLine *ngIf="isExpanded">Productos</p>
-                </mat-list-item>
-
-                <mat-list-item routerLinkActive="active mat-elevation-z6" routerLink="/customers">
-                    <mat-icon mat-list-icon>people_alt</mat-icon>
-                    <p matLine *ngIf="isExpanded">Clientes</p>
+                <mat-list-item routerLinkActive="active mat-elevation-z6" routerLink="/login">
+                    <mat-icon mat-list-icon>exit_to_app</mat-icon>
+                    <p matLine *ngIf="isExpanded">Iniciar Sesión</p>
                 </mat-list-item>
 
                 <mat-divider></mat-divider>

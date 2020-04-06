@@ -27,23 +27,8 @@ export class CategoriesComponent implements AfterViewInit, OnInit {
               private router: Router,
               private categoryService: CategoryService) { }
 
-  private CreateArrayCategory(categoriesObj: object) {
-    const categories: CategoryModel[] = [];
-    if (categoriesObj === null) {
-      return [];
-    }
-    Object.keys(categoriesObj).forEach(key => {
-      const category: CategoryModel = categoriesObj[key];
-      categories.push(category);
-    });
-    return categories;
-  }
-
   ngOnInit() {
-    this.categoryService.getCategories(0)
-        .pipe(
-            map( resp => this.CreateArrayCategory(resp['objCategory']['data']))
-        )
+    this.categoryService.getCategories()
         .subscribe(resp => {
           this.categories = resp;
           this.CATEGORY_DATA = this.categories;
@@ -68,21 +53,21 @@ export class CategoriesComponent implements AfterViewInit, OnInit {
             startWith({}),
             switchMap(() => {
               this.isLoadingResults = true;
-              return this.categoryService.getCategories(this.paginator.pageIndex);
+              return this.categoryService.getCategories();
             }),
             map(data => {
               // Flip flag to show that loading has finished.
               this.isLoadingResults = false;
               // console.log(data);
-              this.resultsLength = data['objCategory']['total'];
-
-              return data['objCategory']['data'];
+              this.resultsLength = data.length;
+              return data;
             }),
             catchError(() => {
               this.isLoadingResults = false;
               // Catch if the GitHub API has reached its rate limit. Return empty data.
               return observableOf([]);
             })
+            // @ts-ignore
         ).subscribe(data => this.dataSource = data);
   }
 
@@ -98,7 +83,7 @@ export class CategoriesComponent implements AfterViewInit, OnInit {
       if ( resp.value ) {
         this.categories.splice(i, 1);
         this.dataSource.data = this.categories;
-        this.categoryService.borrarCategory( category.id ).subscribe(() => this.actualizaTabla(), error => {
+        this.categoryService.borrarCategory( category._id ).subscribe(() => this.actualizaTabla(), error => {
           // console.log(error.error.message);
           Swal.fire({
             title: 'Error',

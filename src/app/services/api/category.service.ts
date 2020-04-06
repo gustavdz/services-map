@@ -19,12 +19,12 @@ export class CategoryService {
 
   crearCategory(category: CategoryModel) {
 
-    return this.http.post(`${this.url}/category`, category, {
-      headers: new HttpHeaders().set('Authorization', `Bearer ${this.auth.userToken}`)
+    return this.http.post(`${this.url}/category/save`, category, {
+      headers: new HttpHeaders().set('Authorization', `${this.auth.userToken}`)
     })
         .pipe(
             map((resp: any) => {
-              category.id = resp.id;
+              category._id = resp.id;
               return category;
             })
         );
@@ -36,37 +36,41 @@ export class CategoryService {
       ...category
     };
 
-    delete categoryTemp.id;
+    delete categoryTemp._id;
 
-    return this.http.put(`${this.url}/category/${category.id}.json`, categoryTemp, {
-      headers: new HttpHeaders().set('Authorization', `Bearer ${this.auth.userToken}`)
+    return this.http.put(`${this.url}/category/edit/${category._id}`, categoryTemp, {
+      headers: new HttpHeaders().set('Authorization', `${this.auth.userToken}`)
     });
   }
 
-  borrarCategory(id: number) {
-    return this.http.delete(`${this.url}/category/${id}`, {
-      headers: new HttpHeaders().set('Authorization', `Bearer ${this.auth.userToken}`)
+  borrarCategory(id: string) {
+    return this.http.delete(`${this.url}/category/delete/${id}`, {
+      headers: new HttpHeaders().set('Authorization', `${this.auth.userToken}`)
     });
   }
 
 
-  getCategory(id: number) {
-    return this.http.get(`${this.url}/category/${id}`, {
-      headers: new HttpHeaders().set('Authorization', `Bearer ${this.auth.userToken}`)
+  getCategory(id: string) {
+    return this.http.get(`${this.url}/category/get/${id}`, {
+      headers: new HttpHeaders().set('Authorization', `${this.auth.userToken}`)
     })
         .pipe(
             map(resp => {
-              return resp['objCategory'];
+              // @ts-ignore
+              return resp.category;
             })
         );
   }
 
-  getCategories(page: number) {
-    return this.http.get(`${this.url}/categories?page=${page + 1}`, {
-      headers: new HttpHeaders().set('Authorization', `Bearer ${this.auth.userToken}`)
+  getCategories() {
+    return this.http.get(`${this.url}/category/get-categories`, {
+      headers: new HttpHeaders().set('Authorization', `${this.auth.userToken}`)
     })
         .pipe(
-            map(resp => this.CreateArrayCategory(resp['objCategory']['data']))
+            map(resp => {
+              // @ts-ignore
+              return this.CreateArrayCategory(resp.categories);
+            })
         );
   }
 
@@ -79,7 +83,10 @@ export class CategoryService {
       const category: CategoryModel = categoriesObj[key];
       categories.push(category);
     });
-    return categories;
+
+    return categories.sort( (a, b) => {
+      return a.name > b.name ? 1 : a.name < b.name ? -1 : 0;
+    });
   }
 
 }

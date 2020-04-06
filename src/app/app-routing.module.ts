@@ -16,7 +16,6 @@ const routes: Routes = [
   { path: '', component: TemplateComponent ,
     children: [
         { path: 'map', component: MapComponent},
-        { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
         { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuard] },
         { path: 'categories/:id', component: CategoryComponent, canActivate: [AuthGuard] },
         { path: '**', redirectTo: '/map', pathMatch: 'prefix' },

@@ -23,16 +23,16 @@ export class AuthService {
 
   login( usuario: UsuarioModel) {
     const authData = {
-      email: usuario.email,
-      password: usuario.password,
+      usuario: usuario.email,
+      contrasena: usuario.password,
       returnSecureToken: true
     };
     return this.http.post(
-        `${this.url}/login`,
+        `${this.url}/autenticar`,
         authData
     ).pipe(
         map( resp => {
-          this.guardarToken( resp ['access_token'], resp ['expires_in'] );
+          this.guardarToken( resp ['token'], resp ['expiresIn'] );
           return resp;
         })
     );
@@ -62,9 +62,7 @@ export class AuthService {
   private guardarToken(idToken: string, expiresIn: string) {
     this.userToken = idToken;
     localStorage.setItem('token', idToken);
-    let hoy = new Date();
-    hoy.setSeconds(Number(expiresIn));
-    localStorage.setItem('expire', hoy.getTime().toString());
+    localStorage.setItem('expire', expiresIn.toString());
   }
 
   leerToken() {
@@ -84,10 +82,6 @@ export class AuthService {
     const expireDate = new Date();
     expireDate.setTime(expire);
 
-    if ( expireDate > new Date() ) {
-      return true;
-    } else {
-      return false;
-    }
+    return expireDate > new Date();
   }
 }

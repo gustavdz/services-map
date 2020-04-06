@@ -7,7 +7,7 @@ export const environment = {
   APIKeys: {
     GoogleMapsAPIKey: 'AIzaSyDjbU0iPZDFsw_D0qiSzQA1U6JBxZWHup4'
   },
-  baseURL: 'http://localhost:8000/api/v1'
+  baseURL: 'http://192.168.131.107:3500'
 };
 
 /*

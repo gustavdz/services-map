@@ -23,12 +23,12 @@ export class CategoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    const id: number = Number(this.route.snapshot.paramMap.get('id'));
-    if ( id > 0 ) {
+    const id: string = this.route.snapshot.paramMap.get('id');
+    if ( id.length > 0 && id !== '0' ) {
       this.categoryService.getCategory( id )
           .subscribe( (resp: CategoryModel) => {
             this.category = resp;
-            this.category.id = id;
+            this.category._id = id;
           });
     }
   }
@@ -51,9 +51,10 @@ export class CategoryComponent implements OnInit {
 
     let peticion: Observable<any>;
 
-    if ( this.category.id > 0 ) {
+    if ( this.category._id && this.category._id !== '0' ) {
       peticion = this.categoryService.actualizarCategory( this.category );
     } else {
+      this.category.status = 'active';
       peticion = this.categoryService.crearCategory( this.category );
     }
 

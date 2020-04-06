@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
         }, (err) => {
           Swal.fire({
             allowOutsideClick: false,
-            text: err.error.error.message,
+            text: err.mensaje,
             icon: 'error',
             title: 'Error al autenticar'
           });
