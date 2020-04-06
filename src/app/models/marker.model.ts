@@ -1,12 +1,13 @@
 import {CategoryModel} from './category.model';
 
 export class MarkerModel {
-  id?: string;
-  lat: number;
-  lng: number;
+  _id: string;
+  lat: string;
+  lng: string;
   label?: string;
   draggable: boolean;
   name: string;
-  description: string;
-  category?: CategoryModel;
+  description?: string;
+  category: CategoryModel;
+  category_id?: string;
 }

@@ -18,12 +18,12 @@ export class MarkerService {
   }
 
   crearMarker( marker: MarkerModel ) {
-    return this.http.post(`${ this.url }/marker`, marker, {
-      headers: new HttpHeaders().set('Authorization', `Bearer ${this.auth.userToken}`)
+    return this.http.post(`${ this.url }/locals/save`, marker, {
+      headers: new HttpHeaders().set('Authorization', `${this.auth.userToken}`)
     })
         .pipe(
             map( (resp: any) => {
-              marker.id = resp.id;
+              marker._id = resp._id;
               return marker;
             })
         );
@@ -33,45 +33,63 @@ export class MarkerService {
     const markerTemp = {
       ...marker
     };
-    delete markerTemp.id;
-    return this.http.put(`${ this.url }/marker/${ marker.id }.json`, markerTemp, {
-      headers: new HttpHeaders().set('Authorization', `Bearer ${this.auth.userToken}`)
+    delete markerTemp._id;
+    return this.http.put(`${ this.url }/locals/edit/${ marker._id }`, markerTemp, {
+      headers: new HttpHeaders().set('Authorization', `${this.auth.userToken}`)
     });
   }
 
-  borrarMarker( id: number ) {
-    return this.http.delete(`${ this.url }/marker/${ id }`, {
-      headers: new HttpHeaders().set('Authorization', `Bearer ${this.auth.userToken}`)
+  borrarMarker( id: string ) {
+    return this.http.delete(`${ this.url }/locals/delete/${ id }`, {
+      headers: new HttpHeaders().set('Authorization', `${this.auth.userToken}`)
     });
   }
 
-  getMarker( id: number ) {
-    return this.http.get(`${this.url}/marker/${ id }`, {
-      headers: new HttpHeaders().set('Authorization', `Bearer ${this.auth.userToken}`)
+  getMarker( id: string ) {
+    return this.http.get(`${this.url}/locals/get/${ id }`, {
+      headers: new HttpHeaders().set('Authorization', `${this.auth.userToken}`)
     })
         .pipe(
             map( resp => {
-              return resp['objMarker'];
+              // @ts-ignore
+              return resp.local;
             })
         );
   }
 
   getMarkers() {
-    return this.http.get(`${this.url}/customers`, {
-      headers: new HttpHeaders().set('Authorization', `Bearer ${this.auth.userToken}`)
+    return this.http.get(`${this.url}/locals/get-locals`, {
+      headers: new HttpHeaders().set('Authorization', `${this.auth.userToken}`)
     })
         .pipe(
-            map(resp => this.CreateArrayMarker(resp['objMarker']['data']))
+            map(resp => {
+                // @ts-ignore
+                return this.CreateArrayMarker(resp.local);
+            })
         );
   }
 
-  private CreateArrayMarker(markersObj: object ) {
+  private CreateArrayMarker(MarkersObj: object) {
     const markers: MarkerModel[] = [];
-    if (markersObj === null ) { return []; }
-    Object.keys(markersObj).forEach( key => {
-      const marker: MarkerModel = markersObj[key];
+    if (MarkersObj === null) {
+      return [];
+    }
+    Object.keys(MarkersObj).forEach(key => {
+      const marker: MarkerModel = MarkersObj[key];
       markers.push(marker);
     });
-    return markers;
+
+    return markers
+        .sort( (a, b) => {
+          return a.category.name > b.category.name ?
+              1 :
+              a.name > b.name ?
+                  1 :
+                  a.name < b.name ?
+                      -1 :
+                      a.category.name < b.category.name ?
+                          -1 :
+                          0;
+        });
   }
 }

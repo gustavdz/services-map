@@ -8,7 +8,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { CategoryComponent } from './pages/categories/category.component';
 import { MapComponent } from './pages/map/map.component';
-import { TemplateComponent } from './pages/map/template/template.component';
+import { TemplateComponent } from './pages/template/template.component';
+import {LocalsComponent} from './pages/locals/locals.component';
+import {LocalComponent} from './pages/locals/local.component';
 
 const routes: Routes = [
   { path: 'registro', component: RegistroComponent },
@@ -18,6 +20,8 @@ const routes: Routes = [
         { path: 'map', component: MapComponent},
         { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuard] },
         { path: 'categories/:id', component: CategoryComponent, canActivate: [AuthGuard] },
+        { path: 'services', component: LocalsComponent, canActivate: [AuthGuard] },
+        { path: 'services/:id', component: LocalComponent, canActivate: [AuthGuard] },
         { path: '**', redirectTo: '/map', pathMatch: 'prefix' },
         { path: '', redirectTo: '/map', pathMatch: 'prefix' }
       ]

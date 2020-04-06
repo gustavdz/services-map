@@ -4,7 +4,7 @@
         <span class="logo-text m-r-10 font-40"> Service Map</span>
         <mat-icon (click)="isExpanded = !isExpanded" class="m-r-10 hov-pointer" >menu</mat-icon>
         <span class="example-fill-remaining-space"></span>
-        <mat-icon class="hov-pointer" (click)="salir()">logout</mat-icon>
+        <mat-icon *ngIf="isAuthenticated" class="hov-pointer" (click)="salir()">logout</mat-icon>
     </mat-toolbar>
     <mat-sidenav-container  class="example-sidenav-container" autosize>
         <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true">
@@ -17,12 +17,19 @@
 
                 <mat-divider></mat-divider>
 
-                <mat-list-item routerLinkActive="active mat-elevation-z6" routerLink="/categories">
+                <mat-list-item *ngIf="isAuthenticated" routerLinkActive="active mat-elevation-z6" routerLink="/categories">
                     <mat-icon mat-list-icon>list</mat-icon>
                     <p matLine *ngIf="isExpanded">Categorias</p>
                 </mat-list-item>
 
-                <mat-list-item routerLinkActive="active mat-elevation-z6" routerLink="/login">
+                <mat-list-item *ngIf="isAuthenticated" routerLinkActive="active mat-elevation-z6" routerLink="/services">
+                    <mat-icon mat-list-icon>store</mat-icon>
+                    <p matLine *ngIf="isExpanded">Locales</p>
+                </mat-list-item>
+
+                <mat-divider *ngIf="isAuthenticated"></mat-divider>
+
+                <mat-list-item *ngIf="!isAuthenticated" routerLinkActive="active mat-elevation-z6" routerLink="/login">
                     <mat-icon mat-list-icon>exit_to_app</mat-icon>
                     <p matLine *ngIf="isExpanded">Iniciar Sesión</p>
                 </mat-list-item>

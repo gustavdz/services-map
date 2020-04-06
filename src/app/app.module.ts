@@ -30,8 +30,10 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { MapComponent } from './pages/map/map.component';
 import {AgmCoreModule} from '@agm/core';
 import {AgmJsMarkerClustererModule} from '@agm/js-marker-clusterer';
-import { TemplateComponent } from './pages/map/template/template.component';
+import { TemplateComponent } from './pages/template/template.component';
 import { environment } from '../environments/environment';
+import { LocalsComponent } from './pages/locals/locals.component';
+import { LocalComponent } from './pages/locals/local.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { environment } from '../environments/environment';
     CategoryComponent,
     TruncatePipe,
     MapComponent,
-    TemplateComponent
+    TemplateComponent,
+    LocalsComponent,
+    LocalComponent
   ],
     imports: [
         BrowserModule,

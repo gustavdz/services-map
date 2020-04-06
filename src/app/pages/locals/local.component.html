@@ -1,0 +1,93 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1>Servicio <small>{{marker.name}}</small> </h1>
+    <hr>
+    <div class="row text-right">
+        <div class="col alternate-theme">
+            <button mat-raised-button color="warn"
+                    routerLink="/services"><i class="fa fa-arrow-left"></i> Regresar</button>
+        </div>
+    </div>
+</div>
+
+<h2>Datos</h2>
+
+<div class="row animated fadeIn faster">
+    <div class="col">
+
+        <form (ngSubmit)="guardar( f )"
+              #f="ngForm">
+
+            <div class="form-group">
+                <label>Servicio ID</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="ID interno"
+                       [(ngModel)]="marker._id"
+                       name="id"
+                       disabled="disabled">
+                <small class="form-text text-muted">Este campo es autogenerado</small>
+            </div>
+
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Nombre del servicio"
+                       [(ngModel)]="marker.name"
+                       name="name"
+                       required>
+            </div>
+            <div class="form-group">
+                <label>Descripción</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Descripción del servicio"
+                       [(ngModel)]="marker.description"
+                       name="description">
+            </div>
+            <div class="form-group">
+                <label>Latitud</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Latitud de la geoposición"
+                       [(ngModel)]="marker.lat"
+                       name="lat"
+                       required>
+            </div>
+            <div class="form-group">
+                <label>Longitud</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Longitud de la geoposición"
+                       [(ngModel)]="marker.lng"
+                       name="lng"
+                       required>
+            </div>
+            <div class="form-group">
+                <label>Etiqueta de Marcador</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Etiqueta para mostrar en el mapa"
+                       [(ngModel)]="marker.label"
+                       name="label"
+                       required>
+            </div>
+            <div class="form-group">
+                <label>Categorías</label>
+                <select class="form-control" name="miselect" [(ngModel)]="seleccionado" [compareWith]="compararNombres">
+                    <option [ngValue]="category" *ngFor="let category of categories">{{category.name}}</option>
+                </select>
+            </div>
+            <hr>
+            <div class="form-group text-center">
+                <button type="submit"
+                        class="btn btn-primary w-25">
+                    <i class="fa fa-save"></i>
+                    Guardar
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>

@@ -24,7 +24,7 @@ export class CategoryService {
     })
         .pipe(
             map((resp: any) => {
-              category._id = resp.id;
+              category._id = resp._id;
               return category;
             })
         );
