@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {UsuarioModel} from '../models/usuario.model';
 import { map } from 'rxjs/operators';
 import {environment} from '../../environments/environment';
@@ -8,7 +8,7 @@ import {environment} from '../../environments/environment';
 })
 export class AuthService {
 
-  private url = environment.baseURL + '/auth';
+  private url = environment.baseURL;
 
   userToken: string;
 
@@ -21,18 +21,32 @@ export class AuthService {
     localStorage.removeItem('expire');
   }
 
+  getUser() {
+    const token = this.leerToken();
+    return this.http.get(`${this.url}/users/get`, {
+      headers: new HttpHeaders().set('Authorization', `${token}`)
+    })
+        .pipe(
+            map( resp => {
+              // @ts-ignore
+              return resp.userObj;
+            })
+        );
+  }
+
   login( usuario: UsuarioModel) {
     const authData = {
-      usuario: usuario.email,
-      contrasena: usuario.password,
+      email: usuario.email,
+      password: usuario.password,
       returnSecureToken: true
     };
     return this.http.post(
-        `${this.url}/autenticar`,
+        `${this.url}/users/login`,
         authData
     ).pipe(
         map( resp => {
-          this.guardarToken( resp ['token'], resp ['expiresIn'] );
+          // @ts-ignore
+          this.guardarToken( resp.token, resp.expiresIn );
           return resp;
         })
     );
@@ -46,12 +60,14 @@ export class AuthService {
       name: usuario.name
     };
     return this.http.post(
-        `${this.url}/register`,
+        `${this.url}/users/signup`,
         authData
     ).pipe(
         map( resp => {
-          if ( resp['objUser']['email_verified_at'] ) {
-            this.guardarToken( resp ['access_token'], resp ['expires_in'] );
+          // @ts-ignore
+          if ( resp.message === 'Registro correcto' ) {
+            // @ts-ignore
+            this.guardarToken( resp.token, resp.expiresIn );
           }
           return resp;
         })
@@ -75,14 +91,11 @@ export class AuthService {
   }
 
   estaAutenticado(): boolean {
-    if (this.userToken.length < 2 && 1 !== 1) {
+    if (this.userToken.length < 2) {
       return false;
     }
     const expire = Number(localStorage.getItem('expire'));
-    const expireDate = new Date();
-    expireDate.setTime(expire);
-
-    // return expireDate > new Date();
-    return true;
+    const expireDate = new Date(expire * 1000);
+    return expireDate > new Date();
   }
 }

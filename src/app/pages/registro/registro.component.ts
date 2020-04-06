@@ -37,31 +37,17 @@ export class RegistroComponent implements OnInit {
           if ( this.recordarme ) {
             localStorage.setItem('email', this.usuario.email);
           }
-          if ( !resp['objUser']['email_verified_at'] ) {
-              Swal.fire({
-                  allowOutsideClick: false,
-                  text: resp['message'],
-                  icon: 'info',
-                  title: 'Siguiente paso'
-              });
-          }
-          this.router.navigateByUrl('/home');
+          // @ts-ignore
+          this.usuario.isAdmin = resp.isAdmin;
+          this.router.navigateByUrl('/map');
         }, (err) => {
             let message: string;
-            if ( err.error.message.email ) {
-                message = err.error.message.email[0];
-            } else if ( err.error.message.name ) {
-                message = err.error.message.name[0];
-            } else if ( err.error.message.password ) {
-                message = err.error.message.password[0];
-            } else if ( err.error.message.c_password ) {
-                message = err.error.message.c_password[0];
-            }
+            message = err.error.message;
             Swal.fire({
             allowOutsideClick: false,
             text: message,
             icon: 'error',
-            title: 'Error al autenticar'
+            title: 'Lo sentimos'
             });
         });
   }

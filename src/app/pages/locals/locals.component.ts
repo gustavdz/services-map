@@ -18,18 +18,29 @@ import {MarkerService} from '../../services/api/marker.service';
 })
 export class LocalsComponent implements AfterViewInit, OnInit {
   markers: MarkerModel[] = [];
-  displayedColumns: string[] = ['#', 'name', 'description', 'category', 'options'];
+  displayedColumns: string[] = [];
   resultsLength = 0;
   isLoadingResults = true;
+  isAdmin = false;
   MARKER_DATA: MarkerModel[] = [];
   dataSource = new MatTableDataSource<MarkerModel>(this.MARKER_DATA);
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
   constructor(private auth: AuthService,
               private router: Router,
-              private markerService: MarkerService) { }
+              private markerService: MarkerService) {}
 
   ngOnInit() {
+    this.auth.getUser()
+      .subscribe(resp => {
+          this.isAdmin = resp.userObj.isAdmin;
+          if (this.isAdmin) {
+              this.displayedColumns = ['#', 'name', 'description', 'category', 'options'];
+          } else {
+              this.displayedColumns = ['#', 'name', 'description', 'category'];
+          }
+      });
+
     this.markerService.getMarkers()
         .subscribe(resp => {
           this.markers = resp;

@@ -9,12 +9,11 @@ import {environment} from '../../../environments/environment';
   providedIn: 'root'
 })
 export class MarkerService {
-
   private url = environment.baseURL;
 
   constructor(private http: HttpClient,
               private auth: AuthService) {
-    this.auth.leerToken();
+      this.auth.leerToken();
   }
 
   crearMarker( marker: MarkerModel ) {

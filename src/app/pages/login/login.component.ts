@@ -44,11 +44,13 @@ export class LoginComponent implements OnInit {
           if ( this.recordarme ) {
             localStorage.setItem('email', this.usuario.email);
           }
-          this.router.navigateByUrl('/home');
+          // @ts-ignore
+          this.usuario.isAdmin = resp.isAdmin;
+          this.router.navigateByUrl('/map');
         }, (err) => {
           Swal.fire({
             allowOutsideClick: false,
-            text: err.mensaje,
+            text: err.error.message,
             icon: 'error',
             title: 'Error al autenticar'
           });

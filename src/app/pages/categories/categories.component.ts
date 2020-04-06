@@ -16,18 +16,29 @@ import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 })
 export class CategoriesComponent implements AfterViewInit, OnInit {
   categories: CategoryModel[] = [];
-  displayedColumns: string[] = ['#', 'name', 'status', 'options'];
+  displayedColumns: string[] = [];
   resultsLength = 0;
   isLoadingResults = true;
+  isAdmin = false;
   CATEGORY_DATA: CategoryModel[] = [];
   dataSource = new MatTableDataSource<CategoryModel>(this.CATEGORY_DATA);
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
   constructor(private auth: AuthService,
               private router: Router,
-              private categoryService: CategoryService) { }
+              private categoryService: CategoryService) {}
 
   ngOnInit() {
+    this.auth.getUser()
+        .subscribe(resp => {
+            this.isAdmin = resp.userObj.isAdmin;
+            if (this.isAdmin) {
+                this.displayedColumns = ['#', 'name', 'status', 'options'];
+            } else {
+                this.displayedColumns = ['#', 'name', 'status'];
+            }
+    });
+
     this.categoryService.getCategories()
         .subscribe(resp => {
           this.categories = resp;

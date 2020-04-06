@@ -3,4 +3,5 @@ export class UsuarioModel {
     password: string;
     name: string;
     c_password: string;
+    isAdmin: boolean;
 }

@@ -21,7 +21,7 @@ export class MapComponent implements OnInit {
   };
   markers: MarkerModel[] = [];
   isLoadingResults = true;
-
+  filters: false;
   constructor(private auth: AuthService,
               private router: Router,
               private markerService: MarkerService) { }
