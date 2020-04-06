@@ -106,7 +106,7 @@ export class LocalComponent implements OnInit {
       });
     }, (err) => {
       let message: string;
-      message = err.message;
+      message = err.error.message,
       Swal.fire({
         allowOutsideClick: false,
         text: message,

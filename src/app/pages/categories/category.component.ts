@@ -68,9 +68,7 @@ export class CategoryComponent implements OnInit {
       });
     }, (err) => {
       let message: string;
-      if ( err.error.message.name ) {
-        message = err.error.message.name[0];
-      }
+      message = err.error.message;
       Swal.fire({
         allowOutsideClick: false,
         text: message,

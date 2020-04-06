@@ -23,8 +23,8 @@ export class MarkerService {
     })
         .pipe(
             map( (resp: any) => {
-              marker._id = resp._id;
-              return marker;
+                marker._id = resp._id;
+                return marker;
             })
         );
   }
